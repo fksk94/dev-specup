@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{argorithm.title}}</h2>
+  <hr>
+  <h6>{{argorithm.content}}</h6>
+  <br>
+  <p>[주소] <a href="{{argorithm.url}}"> {{argorithm.url}} </a></p>
+  <br>
+  <a href="{% url 'argorithms:update' argorithm.pk %}">[글 수정]</a>
+  <form action="{% url 'argorithms:delete' argorithm.pk %}" method="post">
+    {% csrf_token %}
+    <a href='#' onclick='this.parentNode.submit(); return false;'>[글 삭제]</a>
+  </form>
+  <br>
+  <br>
+  <a href="{% url 'argorithms:index' %}">[BACK]</a>
+{% endblock content %}

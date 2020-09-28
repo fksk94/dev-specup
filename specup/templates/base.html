@@ -1,0 +1,26 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+   <title>Developer SPEC UP!</title>
+   {% bootstrap_css %}
+</head>
+<body>
+<div class='container'>
+<br>
+<a href="{% url 'argorithms:create' %}">[새로운 알고리즘 사이트 등록]</a>
+<a href="{% url 'argorithms:index' %}">[알고리즘 사이트 목록]</a>
+<a href="{% url 'accounts:signup' %}">[회원가입]</a>
+<a href="{% url 'accounts:index' %}">[회원목록]</a>
+<br>
+<br>
+<h1>Developer SPEC UP!</h1>
+<hr>
+{% block content %}
+{% endblock content %}
+</div>
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

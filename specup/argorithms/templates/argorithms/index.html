@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>알고리즘 사이트</h2>
+<hr>
+{% for argorithm in argorithms %}
+  <h4><a href="{% url 'argorithms:detail' argorithm.pk %}">{{argorithm.title}}</a></h4>
+  <br>
+{% endfor %}
+{% endblock content %}
