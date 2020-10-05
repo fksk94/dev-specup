@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>{{argorithm.title}}</h2>
+  <h2>{{argorithm.title}} 작성자: {{argorithm.user}} </h2>
   <hr>
   <h6>{{argorithm.content}}</h6>
   <br>
@@ -14,4 +14,20 @@
   <br>
   <br>
   <a href="{% url 'argorithms:index' %}">[BACK]</a>
+  <hr>
+  {% for comment in comments %}
+  <p>
+    [{{comment.user}}]: {{comment}}
+    <form action="{% url 'argorithms:comments_delete' argorithm.pk comment.pk %}" method="post">
+    {% csrf_token %}
+    <a href='#' onclick='this.parentNode.submit(); return false;'>[댓글 삭제]</a>
+    </form>
+  </p>
+  {% endfor %}
+  <br>
+  <form action="{% url 'argorithms:comments_create' argorithm.pk %}" method="post">
+    {% csrf_token %}
+    {{comment_form}}
+    <a href='#' onclick='this.parentNode.submit(); return false;'>[댓글 작성]</a>
+  </form>
 {% endblock content %}
