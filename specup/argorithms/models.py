@@ -4,6 +4,7 @@ from django.conf import settings
 # Create your models here.
 class Argorithm(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_argorithms')
     title = models.CharField(max_length=30)
     content = models.TextField()
     url = models.CharField(max_length=200, default='')

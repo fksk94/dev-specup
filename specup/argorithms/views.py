@@ -90,3 +90,17 @@ def comments_delete(request, pk, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     comment.delete()
     return redirect('argorithms:detail', pk)
+
+@require_POST
+def like(request, pk):
+    # 인증된 사용자만 가능
+    if request.user.is_authenticated:
+        argorithm = get_object_or_404(Argorithm, pk=pk)
+        if argorithm.like_users.filter(pk=request.user.pk).exists():
+            # 좋아요 취소
+            argorithm.like_users.remove(request.user)
+        else:
+            # 좋아요
+            argorithm.like_users.add(request.user)
+        return redirect('argorithms:detail', pk)
+    return redirect('accounts:login')
