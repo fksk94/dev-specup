@@ -67,8 +67,7 @@ def delete(request, pk):
     argorithm = get_object_or_404(Argorithm, pk=pk)
     if request.user == argorithm.user:
         argorithm.delete()
-        return redirect("argorithms:index")
-    return redirect("argorithms:detail", pk)
+    return redirect("argorithms:index")
 
 @require_POST
 def comments_create(request, pk):
