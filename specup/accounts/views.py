@@ -91,3 +91,12 @@ def user_password(request):
         "form":form,
     }
     return render(request, "accounts/user_password.html", context)
+
+@login_required
+def profile(request, name):
+    User = get_user_model()
+    user_data = get_object_or_404(User, username=name)
+    context={
+        "user_data":user_data,
+    }
+    return render(request, "accounts/profile.html", context)
