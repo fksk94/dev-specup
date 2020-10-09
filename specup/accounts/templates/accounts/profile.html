@@ -3,4 +3,13 @@
 <h6>{{user_data.username}}</h6>
 <h6>{{user_data.email}}</h6>
 <h6>{{user_data.last_name}} {{user_data.first_name}}</h6>
+<h6>팔로우 수 : {{user_data.followers.count}}</h6>
+<form action="{% url 'accounts:follow' user_data.pk %}" method="post">
+  {% csrf_token %}
+  {% if user in user_data.followers.all %}
+    <button type="submit" class="btn btn-primary">팔로우 취소</button>
+  {% else %}
+    <button type="submit" class="btn btn-primary">팔로우</button>
+  {% endif %}
+</form>
 {% endblock content %}

@@ -100,3 +100,16 @@ def profile(request, name):
         "user_data":user_data,
     }
     return render(request, "accounts/profile.html", context)
+
+@require_POST
+def follow(request, pk):
+    # 인증된 사용자만 가능
+    if request.user.is_authenticated:
+        you = get_object_or_404(get_user_model(), pk=pk)
+        me = request.user
+        if me != you:
+            if you.followers.filter(pk=me.pk).exists():
+                you.followers.remove(me)
+            else:
+                you.followers.add(me)
+    return redirect('accounts:profile', you.username)

@@ -11,7 +11,7 @@
       <form action="{% url 'argorithms:like' argorithm.pk %}" method="post">
       {% csrf_token %}
       {% if user in argorithm.like_users.all %}
-        <button type="submit" class="btn btn-sm">좋아요</button>
+        <button type="submit" class="btn btn-sm">좋아요 취소</button>
       {% else %}
         <button type="submit" class="btn btn-primary btn-sm">좋아요</button>
       {% endif %}
