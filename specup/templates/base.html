@@ -13,19 +13,31 @@
 <div class="row">
   <a href="{% url 'argorithms:create' %}">[새로운 알고리즘 사이트 등록]</a>
   <a href="{% url 'argorithms:index' %}">[알고리즘 사이트 목록]</a>
-  <a href="{% url 'accounts:signup' %}">[회원가입]</a>
-  <a href="{% url 'accounts:login' %}">[로그인]</a>
+  {% if user.is_authenticated %}
   <a href="{% url 'accounts:update' %}">[프로필 수정]</a>
   <form action="{% url 'accounts:logout' %}" method="post">
     {% csrf_token %}
     <a href='#' onclick='this.parentNode.submit(); return false;'>[로그아웃]</a>
   </form>
-  <form action="{% url 'accounts:delete' %}" method="post">
+  <a href="{% url 'accounts:profile' user %}">[프로필]</a>
+  {% else %}
+    <a href="{% url 'accounts:signup' %}">[회원가입]</a>
+    <a href="{% url 'accounts:login' %}">[로그인]</a>
+  {% endif %}
+  {% comment %} <form action="{% url 'accounts:delete' %}" method="post">
     {% csrf_token %}
     <a href='#' onclick='this.parentNode.submit(); return false;'>[회원삭제]</a>
-  </form>
+  </form> {% endcomment %}
+
   <a href="{% url 'accounts:index' %}">[회원목록]</a>
-  <a href="{% url 'accounts:profile' user %}">[프로필]</a>
+</div>
+<br>
+<div class="row">
+  {% if user.is_authenticated %}
+    <h5>{{user}}님 반갑습니다.</h5>
+  {% else %}
+    <h5>로그인 부탁드려요~~!</h5>
+  {% endif %}
 </div>
 <br>
 <br>
